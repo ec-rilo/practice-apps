@@ -18,6 +18,7 @@ class App extends React.Component {
 
     this.addNote = this.addNote.bind(this);
     this.filterNotes = this.filterNotes.bind(this);
+    this.removeNote = this.removeNote.bind(this);
   }
 
   filterNotes(word) {
@@ -70,6 +71,25 @@ class App extends React.Component {
     }
   }
 
+  removeNote(id) {
+    request.deleteNote(id, (err, response) => {
+      if (err) {
+        console.error(err);
+      } else {
+        request.fetchNotes((err, data) => {
+          if (err) {
+            console.error(err);
+          } else {
+            this.setState({
+              notes: data,
+              viewableNotes: data
+            });
+          }
+        });
+      }
+    });
+  }
+
   componentDidMount() {
     request.fetchNotes((err, data) => {
       if (err) {
@@ -92,7 +112,7 @@ class App extends React.Component {
         <h1>Search for Note</h1>
         <SearchForm filterNotes={this.filterNotes}/>
         <h1>Glossary</h1>
-        <List notes={this.state.viewableNotes}/>
+        <List notes={this.state.viewableNotes} removeNote={this.removeNote}/>
       </div>
     );
   }

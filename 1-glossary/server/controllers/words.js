@@ -24,12 +24,12 @@ module.exports = {
   },
 
   delete: (req, res) => {
-    models.words.deleteOne(req.body, (err, response) => {
+    models.words.deleteOne(req.query, (err, response) => {
       if (err) {
         console.error(err);
         res.send(err);
       } else {
-        res.send(`Word with id# ${req.body._id} has been deleted.`);
+        res.send(`Word with id# ${req.query._id} has been deleted.`);
       }
     });
   }

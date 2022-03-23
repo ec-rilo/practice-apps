@@ -23,6 +23,20 @@ const request = {
     .catch((err) => {
       callback(err);
     });
+  },
+
+  deleteNote: (_id, callback) => {
+    axios.delete('/words', {
+      params: {
+        _id
+      }
+    })
+    .then((response) => {
+      callback(null, response);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
   }
 };
 
