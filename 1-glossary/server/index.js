@@ -12,6 +12,7 @@ app.use(express.json());
 
 app.post('/words', (req, res) => controller.words.post(req, res));
 app.get('/words', (req, res) => controller.words.get(req, res));
+app.delete('/words', (req, res) => controller.words.delete(req, res));
 
 /****
  *

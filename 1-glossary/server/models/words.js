@@ -24,5 +24,15 @@ module.exports = {
         callback(null, data);
       }
     });
+  },
+
+  deleteOne: (wordsData, callback) => {
+    Word.deleteOne({ _id: wordsData._id}, (err) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null);
+      }
+    });
   }
 }

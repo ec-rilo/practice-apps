@@ -21,5 +21,16 @@ module.exports = {
         res.send(response)
       }
     });
+  },
+
+  delete: (req, res) => {
+    models.words.deleteOne(req.body, (err, response) => {
+      if (err) {
+        console.error(err);
+        res.send(err);
+      } else {
+        res.send(`Word with id# ${req.body._id} has been deleted.`);
+      }
+    });
   }
 }
