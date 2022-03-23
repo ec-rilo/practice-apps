@@ -14,5 +14,15 @@ module.exports = {
     .catch((err) => {
       callback(err);
     });
+  },
+
+  getAll: (callback) => {
+    Word.find({}, (err, data) => {
+      if (err) {
+        callback(err, data);
+      } else {
+        callback(null, data);
+      }
+    });
   }
 }

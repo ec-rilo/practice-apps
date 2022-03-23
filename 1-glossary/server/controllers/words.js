@@ -10,5 +10,16 @@ module.exports = {
         res.send(response);
       }
     });
+  },
+
+  get: (req, res) => {
+    models.words.getAll((err, response) => {
+      if (err) {
+        console.error(err);
+        res.send(err);
+      } else {
+        res.send(response)
+      }
+    });
   }
 }
