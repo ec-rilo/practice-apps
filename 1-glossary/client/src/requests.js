@@ -8,7 +8,20 @@ const request = {
     })
     .catch((err) => {
       console.error(err);
-      callback(err, response.data);
+      callback(err);
+    });
+  },
+
+  postNote: (wordData, callback) => {
+    axios.post('/words', {
+      word: wordData.word,
+      definition: wordData.definition
+    })
+    .then((response) => {
+      callback(null, response);
+    })
+    .catch((err) => {
+      callback(err);
     });
   }
 };

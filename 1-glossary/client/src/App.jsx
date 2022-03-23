@@ -4,6 +4,7 @@ import request from './requests.js';
 
 // Components
 import List from './components/List.jsx';
+import Form from './components/Form.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,6 +12,33 @@ class App extends React.Component {
 
     this.state = {
       notes: []
+    }
+
+    this.addNote = this.addNote.bind(this);
+  }
+
+  addNote(word, definition) {
+    const wordData = { word, definition };
+
+    if (word && definition) {
+      request.postNote(wordData, (err, response) => {
+        if (err) {
+          console.error(err);
+        } else {
+          request.fetchNotes((err, data) => {
+            if (err) {
+              console.error(err);
+            } else {
+              console.log(data);
+              this.setState({
+                notes: data
+              });
+            }
+          });
+        }
+      });
+    } else {
+      console.log('You must enter a word AND definition!');
     }
   }
 
@@ -29,6 +57,7 @@ class App extends React.Component {
   render() {
     return(
       <div>
+        <Form addNote={this.addNote}/>
         <h1>Glossary</h1>
         <List notes={this.state.notes}/>
       </div>
