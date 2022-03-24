@@ -90,6 +90,14 @@ class App extends React.Component {
     });
   }
 
+  editNote(word, definition, id) {
+    if (word && definition) {
+
+    } else {
+      console.log('To edit a note please enter a word AND definition!');
+    }
+  }
+
   componentDidMount() {
     request.fetchNotes((err, data) => {
       if (err) {

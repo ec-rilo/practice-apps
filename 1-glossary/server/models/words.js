@@ -34,5 +34,15 @@ module.exports = {
         callback(null);
       }
     });
+  },
+
+  editOne: (wordData, callback) => {
+    Word.findByIdAndUpdate(wordData._id, { word: wordData.word, definition: wordData.definition }, (err, response) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, response);
+      }
+    });
   }
 }
