@@ -37,6 +37,20 @@ const request = {
     .catch((err) => {
       console.error(err);
     });
+  },
+
+  updateNote: (wordData, callback) => {
+    axios.put('/words', {
+      word: wordData.word,
+      definition: wordData.definition,
+      _id: wordData._id
+    })
+    .then((response) => {
+      callback(null, response);
+    })
+    .catch((err) => {
+      callback(err);
+    });
   }
 };
 

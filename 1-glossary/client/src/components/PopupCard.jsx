@@ -28,6 +28,7 @@ class PopupCard extends React.Component {
         placeholder='definition'
         onChange={(e) => this.setState({ definition: e.target.value })}
         />
+        <button type='submit'>Update</button>
       </form>
     );
   }
