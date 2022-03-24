@@ -22,7 +22,9 @@ class Card extends React.Component {
           <button onClick={() => this.setState({ popupActive: !this.state.popupActive })}>Edit</button>
           <button onClick={() => removeNote(note._id)}>Delete</button>
         </div>
-        {this.state.popupActive && <PopupCard note={note} editNote={editNote}/>}
+        {this.state.popupActive
+        &&
+        <PopupCard note={note} editNote={editNote} closePopup={() => this.setState({ popupActive: false})}/>}
       </div>
     );
   }

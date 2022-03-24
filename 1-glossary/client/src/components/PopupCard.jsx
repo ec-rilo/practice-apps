@@ -15,6 +15,9 @@ class PopupCard extends React.Component {
       <form onSubmit={(e) => {
         e.preventDefault();
         this.props.editNote(this.state.word, this.state.definition, this.props.note._id);
+        if (this.state.word && this.state.definition) {
+          this.props.closePopup();
+        }
       }}>
         <p>Edit Word</p>
         <input
