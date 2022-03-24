@@ -15,11 +15,6 @@ db.connectAsync()
   .then(() => console.log(`Connected to MySQL as id: ${db.threadId}`))
   .then(() =>
     db.queryAsync(
-      "CREATE DATABASE IF NOT EXISTS checkout; "
-    )
-  )
-  .then(() =>
-    db.queryAsync(
       "CREATE TABLE IF NOT EXISTS billing (" +
       "id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
       "credit_card TINYINT, " +
@@ -44,10 +39,11 @@ db.connectAsync()
     // Expand this table definition as needed:
     db.queryAsync(
       "CREATE TABLE IF NOT EXISTS users (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
+      "session_id INT NOT NULL UNIQUE, " +
       "name VARCHAR(25), " +
       "email VARCHAR(30), " +
       "password VARCHAR(30), " +
-      "checkoutComplete TINYINT DEFAULT 0, " +
+      "checkout_complete TINYINT DEFAULT 0, " +
       "id_billing INT, " +
       "id_shipping INT, " +
       "FOREIGN KEY (id_billing) " + "REFERENCES billing(id) ON DELETE CASCADE, " +

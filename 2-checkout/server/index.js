@@ -9,6 +9,9 @@ const db = require("./db");
 
 const app = express();
 
+// Router
+const router = require('./routes');
+
 // Adds `req.session_id` based on the incoming cookie value.
 // Generates a new session if one does not exist.
 app.use(sessionHandler);
@@ -18,14 +21,9 @@ app.use(logger);
 
 // Serves up all static and generated assets in ../client/dist.
 app.use(express.static(path.join(__dirname, "../client/dist")));
+app.use(express.json());
 
-/****
- *
- *
- * Other routes here....
- *
- *
- */
+app.use('/checkout', router);
 
 app.listen(process.env.PORT);
 console.log(`Listening at http://localhost:${process.env.PORT}`);
