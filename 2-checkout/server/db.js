@@ -31,7 +31,7 @@ db.connectAsync()
       "line_2 VARCHAR(25), " +
       "city VARCHAR(25), " +
       "state VARCHAR(25), " +
-      "zip TINYINT, " +
+      "zip INT, " +
       "phone INT);"
     )
   )
