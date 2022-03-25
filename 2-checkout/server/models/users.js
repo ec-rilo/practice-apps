@@ -44,5 +44,18 @@ module.exports = {
     .catch((err) => {
       callback(err);
     });
+  },
+
+  updateCheckoutComplete: (callback) => {
+    const query = 'UPDATE users SET checkout_complete = 1';
+
+    db.query(query, (err, response) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, response);
+      }
+    });
   }
+
 };

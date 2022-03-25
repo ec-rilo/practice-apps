@@ -22,6 +22,16 @@ module.exports = {
         res.send(response);
       }
     });
+  },
+
+  put: (req, res) => {
+    models.users.updateCheckoutComplete((err, response) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(response);
+      }
+    });
   }
 
 };
