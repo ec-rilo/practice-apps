@@ -3,7 +3,9 @@ const db = require('../db.js');
 module.exports = {
 
   getUser: (user, callback) => {
-    const query = 'SELECT * FROM users WHERE session_id = ?';
+    const query = 'SELECT * FROM users, shipping, billing ' +
+    'WHERE users.session_id = ? AND users.id_billing = billing.id ' +
+    'AND users.id_shipping = shipping.id';
 
     db.query(query, [user.session_id], (err, response) => {
       if (err) {
