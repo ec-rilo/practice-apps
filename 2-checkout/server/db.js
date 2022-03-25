@@ -17,10 +17,10 @@ db.connectAsync()
     db.queryAsync(
       "CREATE TABLE IF NOT EXISTS billing (" +
       "id INT NOT NULL PRIMARY KEY, " +
-      "credit_card TINYINT, " +
+      "credit_card BIGINT, " +
       "expiry_date VARCHAR(25), " +
-      "cvv TINYINT, " +
-      "billing_zip TINYINT);"
+      "cvv INT, " +
+      "billing_zip INT);"
     )
   )
   .then(() =>
