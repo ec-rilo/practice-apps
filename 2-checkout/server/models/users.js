@@ -15,17 +15,32 @@ module.exports = {
   },
 
   addUser: (user, callback) => {
-    const query = 'INSERT INTO users VALUES (null, ?, ?, ?, ?, 0, null, null)';
-
-    db.query(
-      query,
-      [user.session_id, user.name, user.email, user.password],
-      (err, response) => {
-      if (err) {
-        callback(err);
-      } else {
+    db.beginTransactionAsync()
+    .then(() => {
+      const query = 'INSERT INTO shipping VALUES (?, null, null, null, null, null, null);';
+      db.query(
+        query,
+        [user.session_id]);
+    })
+    .then(() => {
+      const query = 'INSERT INTO billing VALUES (?, null, null, null, null);';
+      db.query(
+        query,
+        [user.session_id]);
+    })
+    .then(() => {
+      const query = 'INSERT INTO users VALUES (null, ?, ?, ?, ?, 0, ?, ?);';
+      db.query(
+        query,
+        [user.session_id, user.name, user.email, user.password, user.session_id, user.session_id]);
+    })
+    .then((response) => {
+      db.commitAsync((response) => {
         callback(null, response);
-      }
+      });
+    })
+    .catch((err) => {
+      callback(err);
     });
   }
 };

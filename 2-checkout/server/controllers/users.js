@@ -14,7 +14,6 @@ module.exports = {
   },
 
   post: (req, res) => {
-    console.log('req');
     models.users.addUser(req.body, (err, response) => {
       if (err) {
         console.error(err);
