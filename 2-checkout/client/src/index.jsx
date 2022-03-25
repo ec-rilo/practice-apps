@@ -1,12 +1,9 @@
 import React from "react";
-import { render } from "react-dom";
+import ReactDOM from 'react-dom';
 
-render(
-  <div>
-    <p>Hello, World!</p>
-    <p>
-      <code>Page Cookie: {JSON.stringify(document.cookie, undefined, "\t")}</code>
-    </p>
-  </div>,
-  document.getElementById("root")
-);
+// Components
+import App from './components/App.jsx';
+
+
+ReactDOM.render(<App />, document.getElementById('root'));
+
