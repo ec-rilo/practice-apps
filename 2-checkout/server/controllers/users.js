@@ -3,6 +3,7 @@ const models = require('../models/models');
 module.exports = {
 
   get: (req, res) => {
+    req.body.session_id = req.session_id;
     models.users.getUser(req.body, (err, response) => {
       if (err) {
         console.error(err);
@@ -14,7 +15,7 @@ module.exports = {
   },
 
   post: (req, res) => {
-    models.users.addUser(req.body, (err, response) => {
+    models.users.addUser(req.session_id, (err, response) => {
       if (err) {
         console.error(err);
         res.send(err);
@@ -25,7 +26,7 @@ module.exports = {
   },
 
   put: (req, res) => {
-    models.users.updateCheckoutComplete((err, response) => {
+    models.users.updateCheckoutComplete(req.session_id, (err, response) => {
       if (err) {
         res.send(err);
       } else {

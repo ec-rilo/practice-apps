@@ -49,6 +49,7 @@ class App extends React.Component {
     return (
       <div>
         <h1>Multi-Step-Checkout</h1>
+        {this.state.currForm === 0 && <NextBtn updateUser={this.updateUser} createUser={this.createUser}/>}
       </div>
     );
   }

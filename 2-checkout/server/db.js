@@ -16,7 +16,7 @@ db.connectAsync()
   .then(() =>
     db.queryAsync(
       "CREATE TABLE IF NOT EXISTS billing (" +
-      "id INT NOT NULL PRIMARY KEY, " +
+      "id VARCHAR(200) NOT NULL PRIMARY KEY, " +
       "credit_card BIGINT, " +
       "expiry_date VARCHAR(25), " +
       "cvv INT, " +
@@ -26,7 +26,7 @@ db.connectAsync()
   .then(() =>
     db.queryAsync(
       "CREATE TABLE IF NOT EXISTS shipping (" +
-      "id INT NOT NULL PRIMARY KEY, " +
+      "id VARCHAR(200) NOT NULL PRIMARY KEY, " +
       "line_1 VARCHAR(25), " +
       "line_2 VARCHAR(25), " +
       "city VARCHAR(25), " +
@@ -39,7 +39,7 @@ db.connectAsync()
     // Expand this table definition as needed:
     db.queryAsync(
       "CREATE TABLE IF NOT EXISTS users (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
-      "session_id INT NOT NULL UNIQUE, " +
+      "session_id VARCHAR(200) NOT NULL UNIQUE, " +
       "name VARCHAR(25), " +
       "email VARCHAR(30), " +
       "password VARCHAR(30), " +

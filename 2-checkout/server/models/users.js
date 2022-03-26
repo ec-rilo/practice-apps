@@ -16,25 +16,25 @@ module.exports = {
     });
   },
 
-  addUser: (user, callback) => {
+  addUser: (session_id, callback) => {
     db.beginTransactionAsync()
     .then(() => {
       const query = 'INSERT INTO shipping VALUES (?, null, null, null, null, null, null);';
       db.query(
         query,
-        [user.session_id]);
+        [session_id]);
     })
     .then(() => {
       const query = 'INSERT INTO billing VALUES (?, null, null, null, null);';
       db.query(
         query,
-        [user.session_id]);
+        [session_id]);
     })
     .then(() => {
       const query = 'INSERT INTO users VALUES (null, ?, null, null, null, 0, ?, ?);';
       db.query(
         query,
-        [user.session_id, user.session_id, user.session_id]);
+        [session_id, session_id, session_id]);
     })
     .then((response) => {
       db.commitAsync((response) => {
@@ -46,10 +46,11 @@ module.exports = {
     });
   },
 
-  updateCheckoutComplete: (callback) => {
-    const query = 'UPDATE users SET checkout_complete = 1';
+  updateCheckoutComplete: (id, callback) => {
+    const query = 'UPDATE users SET checkout_complete = 1 ' +
+    'WHERE session_id = ?';
 
-    db.query(query, (err, response) => {
+    db.query(query, [id], (err, response) => {
       if (err) {
         callback(err);
       } else {
