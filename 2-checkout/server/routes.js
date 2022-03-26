@@ -1,12 +1,13 @@
 const controller = require('./controllers/controllers');
 const router = require('express').Router();
 
-router.get('/', (req, res) => controller.users.get(req, res));
-router.post('/', (req, res) => controller.users.post(req, res));
-router.put('/', (req, res) => controller.users.put(req, res));
+// do this!!!!
+router.get('/', controller.users.get);
+router.post('/', controller.users.post);
+router.put('/', controller.users.put);
 
-router.put('/form_1', (req, res) => controller.form_1.put(req, res));
-router.put('/form_2', (req, res) => controller.form_2.put(req, res));
-router.put('/form_3', (req, res) => controller.form_3.put(req, res));
+router.put('/form_1', controller.form_1.put);
+router.put('/form_2', controller.form_2.put);
+router.put('/form_3', controller.form_3.put);
 
 module.exports = router;

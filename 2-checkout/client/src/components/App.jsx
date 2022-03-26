@@ -2,9 +2,10 @@ import React from 'react';
 
 // Components
 import NextBtn from './NextBtn.jsx';
+import Form_1 from './Form_1.jsx';
 
 // axios
-import requests from '../requests.js';
+import { form_0, form_1 } from '../requests.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -37,16 +38,27 @@ class App extends React.Component {
   }
 
   updateUser(user) {
-
+    if (this.state.currForm === 1) {
+      form_1.updateUser(user, (err, response) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(response);
+        }
+      });
+    }
   }
 
   createUser(user) {
-    requests.getUser((err, user) => {
+
+    // RESEARCH PROMISES & ASYNC AWAIT AFTER TA
+
+    form_0.getUser((err, user) => {
       if (err) {
         console.error(err);
       } else {
         if (!user) {
-          requests.addUser((err, response) => {
+          form_0.addUser((err, response) => {
             if (err) {
               console.error(err);
             } else {
@@ -80,13 +92,24 @@ class App extends React.Component {
           this.createUser(this.state.user);
         }}
         />}
-        {/* {this.state.currForm === 1
+
+        {this.state.currForm === 1
         &&
-        <NextBtn callback={() => {
+        <Form_1 callback={(name, email, password) => {
+          const user = {
+            name,
+            email,
+            password,
+            session_id: this.state.user.session_id
+          };
+          this.updateUser(user);
           this.updateViewableForm();
-          this.createUser(this.state.user);
-        }}
-        />} */}
+        }
+      }
+        userName={this.state.user.name}
+        userEmail={this.state.user.email}
+        userPass={this.state.user.password}
+        />}
       </div>
     );
   }

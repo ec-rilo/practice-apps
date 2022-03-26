@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const requests = {
+const form_0 = {
 
   getUser: (callback) => {
     axios.get('/checkout/')
@@ -20,8 +20,22 @@ const requests = {
     .catch((err) => {
       callback(err);
     });
-  }
+  },
 
 };
 
-export default requests;
+const form_1 = {
+
+  updateUser: (user, callback) => {
+    axios.put('checkout/form_1', user)
+    .then((response) => {
+      callback(null, response.data);
+    })
+    .catch((err) => {
+      callback(err);
+    })
+  }
+
+}
+
+export { form_0, form_1 };
