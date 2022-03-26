@@ -11,8 +11,22 @@ class Form_1 extends React.Component {
     this.state = {
       name: '',
       email: '',
-      pass: ''
+      password: ''
     }
+
+    this.allKeysArePopulated = this.allKeysArePopulated.bind(this);
+  }
+
+  allKeysArePopulated(user) {
+    let allArePopulated = true;
+    for (let key in user) {
+      if (user[key] === '') {
+        allArePopulated = false;
+        break;
+      }
+    }
+
+    return allArePopulated;
   }
 
   componentDidMount() {
@@ -61,10 +75,10 @@ class Form_1 extends React.Component {
         <h1>Form 1</h1>
         <form onSubmit={(e) => {
           e.preventDefault();
-          const {name, email, password} = this.state;
+          const user = this.state;
+          const allKeysArePopulated = this.allKeysArePopulated(user);
 
-          if (name && email && password) {
-            const user = this.state;
+          if (allKeysArePopulated) {
             callback(user);
           } else {
             window.alert('ALL fields must be filled out in order to submit!');

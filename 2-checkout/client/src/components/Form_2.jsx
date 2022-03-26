@@ -16,6 +16,20 @@ class Form_2 extends React.Component {
       zip_shipping: '',
       phone: ''
     }
+
+    this.allKeysArePopulated = this.allKeysArePopulated.bind(this);
+  }
+
+  allKeysArePopulated(user) {
+    let allArePopulated = true;
+    for (let key in user) {
+      if (user[key] === '') {
+        allArePopulated = false;
+        break;
+      }
+    }
+
+    return allArePopulated;
   }
 
   componentDidMount() {
@@ -88,10 +102,10 @@ class Form_2 extends React.Component {
         <h1>Form 2</h1>
         <form onSubmit={(e) => {
           e.preventDefault();
-          const {line_1, line_2, city, state, zip_shipping, phone} = this.state;
           const user = this.state;
+          const allKeysArePopulated = this.allKeysArePopulated(user);
 
-          if (line_1 && line_2 && city && state && zip_shipping && phone) {
+          if (allKeysArePopulated) {
             callback(user);
           } else {
             console.log(this.state);
