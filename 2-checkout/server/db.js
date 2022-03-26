@@ -32,7 +32,7 @@ db.connectAsync()
       "city VARCHAR(25), " +
       "state VARCHAR(25), " +
       "zip_shipping INT, " +
-      "phone INT);"
+      "phone VARCHAR(100));"
     )
   )
   .then(() =>

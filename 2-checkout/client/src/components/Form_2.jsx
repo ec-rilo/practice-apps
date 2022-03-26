@@ -40,36 +40,42 @@ class Form_2 extends React.Component {
 
     const data = [
       {
+        propName: 'line_1',
         title: 'Line 1: ',
         placeholderName: 'Line 1',
         defaultVal: this.state.line_1,
         callback: (e) => this.setState({ line_1: e.target.value })
       },
       {
+        propName: 'line_2',
         title: 'Line 2: ',
         placeholderName: 'Line 2',
         defaultVal: this.state.line_2,
         callback: (e) => this.setState({ line_2: e.target.value })
       },
       {
+        propName: 'city',
         title: 'City: ',
         placeholderName: 'City',
         defaultVal: this.state.city,
         callback: (e) => this.setState({ city: e.target.value })
       },
       {
+        propName: 'state',
         title: 'State: ',
         placeholderName: 'State',
         defaultVal: this.state.state,
         callback: (e) => this.setState({ state: e.target.value })
       },
       {
+        propName: 'zip_shipping',
         title: 'Zip: ',
         placeholderName: 'Zip',
         defaultVal: this.state.zip_shipping,
         callback: (e) => this.setState({ zip_shipping: e.target.value })
       },
       {
+        propName: 'phone',
         title: 'Phone: ',
         placeholderName: 'Phone',
         defaultVal: this.state.phone,
@@ -89,24 +95,26 @@ class Form_2 extends React.Component {
             city,
             state,
             zip_shipping,
-            phone
+            phone,
           }
 
           if (line_1 && line_2 && city && state && zip_shipping && phone) {
             callback(user);
           } else {
+            console.log(this.state);
             window.alert('ALL fields must be filled out in order to submit!');
           }
         }}>
           <ul>
             {data.map((data, index) => {
+              const prop = data.propName
               return (
                 <InputBox
                 key={index}
                   title={data.title}
                   placeholderName={data.placeholderName}
                   defaultVal={data.defaultVal}
-                  callback={(e) => this.setState({ name: e.target.value })}
+                  callback={(e) => this.setState({ [prop]: e.target.value })}
                 />
               );
             })}

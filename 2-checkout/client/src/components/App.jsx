@@ -6,7 +6,7 @@ import Form_1 from './Form_1.jsx';
 import Form_2 from './Form_2.jsx';
 
 // axios
-import { form_0, form_1 } from '../requests.js';
+import { form_0, form_1, form_2 } from '../requests.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -42,11 +42,19 @@ class App extends React.Component {
     if (this.state.currForm === 1) {
       form_1.updateUser(user, (err, response) => {
         if (err) {
-          console.log(err);
+          console.error(err);
         } else {
           console.log(response);
         }
       });
+    } else if (this.state.currForm === 2) {
+      form_2.updateUser(user, (err, response) => {
+        if(err) {
+          console.error(err);
+        } else {
+          console.log(response);
+        }
+      })
     }
   }
 

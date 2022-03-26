@@ -34,24 +34,27 @@ class Form_1 extends React.Component {
 
     const data = [
       {
+        propName: 'name',
         title: 'Name: ',
         placeholderName: 'Name',
         defaultVal: this.state.name,
         callback: (e) => this.setState({ name: e.target.value })
       },
       {
+        propName: 'email',
         title: 'Email: ',
         placeholderName: 'Email',
         defaultVal: this.state.email,
         callback: (e) => this.setState({ email: e.target.value })
       },
       {
+        propName: 'password',
         title: 'Password: ',
         placeholderName: 'Password',
         defaultVal: this.state.password,
         callback: (e) => this.setState({ password: e.target.value })
-      },
-    ]
+      }
+    ];
 
     return(
       <div>
@@ -68,13 +71,14 @@ class Form_1 extends React.Component {
         }}>
           <ul>
           {data.map((data, index) => {
+              const prop = data.propName;
               return (
                 <InputBox
                   key={index}
                   title={data.title}
                   placeholderName={data.placeholderName}
                   defaultVal={data.defaultVal}
-                  callback={(e) => this.setState({ name: e.target.value })}
+                  callback={(e) => this.setState({ [prop]: e.target.value })}
                 />
               );
             })}

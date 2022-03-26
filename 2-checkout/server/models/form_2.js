@@ -6,7 +6,7 @@ module.exports = {
     const query = 'UPDATE shipping, users SET ' +
     'shipping.line_1 = ?, shipping.line_2 = ?, ' +
     'shipping.city = ?, shipping.state = ?, ' +
-    'shipping.zip = ?, shipping.phone = ? ' +
+    'shipping.zip_shipping = ?, shipping.phone = ? ' +
     'WHERE users.session_id = ? ' +
     'AND shipping.id = users.id_shipping';
 
