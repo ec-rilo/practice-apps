@@ -91,46 +91,35 @@ class App extends React.Component {
   }
 
   render() {
+    let form;
+
+    if (this.state.currForm === 0) {
+      form = (<NextBtn callback={() => {
+        this.updateViewableForm();
+        this.createUser(this.state.user);
+      }} />);
+    } else if (this.state.currForm === 1) {
+      form =
+      (<Form_1
+        callback={(user) => {
+          this.updateUser(user);
+          this.updateViewableForm();
+        }
+      } />);
+    } else if (this.state.currForm === 2) {
+      form =
+      (<Form_2
+      callback={(user) => {
+        this.updateUser(user);
+        this.updateViewableForm();
+      }
+    }/>);
+    }
+
     return (
       <div>
         <h1>Multi-Step-Checkout</h1>
-        {this.state.currForm === 0
-        &&
-        <NextBtn callback={() => {
-          this.updateViewableForm();
-          this.createUser(this.state.user);
-        }}
-        />}
-
-        {this.state.currForm === 1
-        &&
-        <Form_1 callback={(name, email, password) => {
-          const user = {
-            name,
-            email,
-            password,
-            session_id: this.state.user.session_id
-          };
-          this.updateUser(user);
-          this.updateViewableForm();
-        }
-      }
-        userName={this.state.user.name}
-        userEmail={this.state.user.email}
-        userPass={this.state.user.password}
-        />}
-
-        {this.state.currForm === 2
-        &&
-        <Form_2 callback={(user) => {
-          this.updateUser(user);
-          this.updateViewableForm();
-        }
-      }
-        userName={this.state.user.name}
-        userEmail={this.state.user.email}
-        userPass={this.state.user.password}
-        />}
+        {form}
       </div>
     );
   }

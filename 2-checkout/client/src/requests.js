@@ -43,7 +43,7 @@ const form_2 = {
   updateUser: (user, callback) => {
     axios.put('/checkout/form_2', user)
     .then((response) => {
-      callback(null, response);
+      callback(null, response.data);
     })
     .catch(() => {
       callback(err);

@@ -64,7 +64,8 @@ class Form_1 extends React.Component {
           const {name, email, password} = this.state;
 
           if (name && email && password) {
-            callback(name, email, password);
+            const user = this.state;
+            callback(user);
           } else {
             window.alert('ALL fields must be filled out in order to submit!');
           }

@@ -89,14 +89,7 @@ class Form_2 extends React.Component {
         <form onSubmit={(e) => {
           e.preventDefault();
           const {line_1, line_2, city, state, zip_shipping, phone} = this.state;
-          const user = {
-            line_1,
-            line_2,
-            city,
-            state,
-            zip_shipping,
-            phone,
-          }
+          const user = this.state;
 
           if (line_1 && line_2 && city && state && zip_shipping && phone) {
             callback(user);
@@ -110,7 +103,7 @@ class Form_2 extends React.Component {
               const prop = data.propName
               return (
                 <InputBox
-                key={index}
+                  key={index}
                   title={data.title}
                   placeholderName={data.placeholderName}
                   defaultVal={data.defaultVal}
