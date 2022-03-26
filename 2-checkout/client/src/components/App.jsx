@@ -3,6 +3,7 @@ import React from 'react';
 // Components
 import NextBtn from './NextBtn.jsx';
 import Form_1 from './Form_1.jsx';
+import Form_2 from './Form_2.jsx';
 
 // axios
 import { form_0, form_1 } from '../requests.js';
@@ -102,6 +103,18 @@ class App extends React.Component {
             password,
             session_id: this.state.user.session_id
           };
+          this.updateUser(user);
+          this.updateViewableForm();
+        }
+      }
+        userName={this.state.user.name}
+        userEmail={this.state.user.email}
+        userPass={this.state.user.password}
+        />}
+
+        {this.state.currForm === 2
+        &&
+        <Form_2 callback={(user) => {
           this.updateUser(user);
           this.updateViewableForm();
         }

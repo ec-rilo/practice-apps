@@ -17,7 +17,7 @@ module.exports = {
         user.line_2,
         user.city,
         user.state,
-        user.zip,
+        user.zip_shipping,
         user.phone,
         user.session_id
       ],
