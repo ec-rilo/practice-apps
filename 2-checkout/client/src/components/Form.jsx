@@ -10,6 +10,7 @@ class Form extends React.Component {
     this.state = this.props.newState;
 
     this.allKeysArePopulated = this.allKeysArePopulated.bind(this);
+    this.addDefaultKeys = this.addDefaultKeys.bind(this);
   }
 
   allKeysArePopulated(user) {
@@ -24,17 +25,33 @@ class Form extends React.Component {
     return allArePopulated;
   }
 
+  addDefaultKeys(user) {
+    for (let key in user) {
+      const newKey = 'default_' + key;
+      user[newKey] = user[key];
+    }
+
+    return user;
+  }
+
+  addKeys(target, source) {
+    this.props.data.forEach((obj) => {
+      const key = obj.propName;
+      target[key] = source[key];
+    });
+  }
+
   componentDidMount() {
     form_0.getUser((err, user) => {
       if (err) {
         console.log(err);
       } else {
-        const newUser = Object.assign({}, user);
+        const newUser = {};
 
-        for (let key in newUser) {
-          const newKey = 'default_' + key;
-          newUser[newKey] = user[key];
-        }
+        this.addKeys(newUser, user);
+
+        this.addDefaultKeys(newUser);
+        newUser.formSubmitted = false;
 
         this.setState(newUser);
       }
@@ -53,9 +70,11 @@ class Form extends React.Component {
           const allKeysArePopulated = this.allKeysArePopulated(user);
 
           if (allKeysArePopulated) {
+            this.setState({
+              formSubmitted: true
+            })
             callback(user);
           } else {
-            console.log(this.state);
             window.alert('ALL fields must be filled out in order to submit!');
           }
         }}>

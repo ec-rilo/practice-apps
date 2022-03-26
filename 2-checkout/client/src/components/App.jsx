@@ -2,12 +2,10 @@ import React from 'react';
 
 // Components
 import NextBtn from './NextBtn.jsx';
-import Form_1 from './Form_1.jsx';
-import Form_2 from './Form_2.jsx';
 import Form from './Form.jsx';
 
 // axios
-import { form_0, form_1, form_2 } from '../requests.js';
+import { form_0, form_1, form_2, form_3 } from '../requests.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -56,6 +54,14 @@ class App extends React.Component {
           console.log(response);
         }
       })
+    } else if (this.state.currForm === 3) {
+      form_3.updateUser(user, (err, response) => {
+        if(err) {
+          console.error(err);
+        } else {
+          console.log(response);
+        }
+      })
     }
   }
 
@@ -92,15 +98,13 @@ class App extends React.Component {
   }
 
   render() {
-    let form;
 
-    if (this.state.currForm === 0) {
-      form = (<NextBtn callback={() => {
+      const form0 = (<NextBtn callback={() => {
         this.updateViewableForm();
         this.createUser(this.state.user);
       }} />);
-    } else if (this.state.currForm === 1) {
-      form = (
+
+      const form1 = (
         <Form
         formNum={this.state.currForm}
         callback={(user) => {
@@ -135,8 +139,9 @@ class App extends React.Component {
         }
         />
       );
-    } else if (this.state.currForm === 2) {
-      form = <Form
+
+      const form2 =
+      (<Form
       formNum={this.state.currForm}
       callback={(user) => {
         this.updateUser(user);
@@ -186,13 +191,57 @@ class App extends React.Component {
           }
         ]
       }
-      />
-    }
+      />);
+
+      const form3 =
+      (<Form
+      formNum={this.state.currForm}
+      callback={(user) => {
+        this.updateUser(user);
+        this.updateViewableForm();
+      }}
+      newState={
+        {
+          credit_card: '',
+          expiry_date: '',
+          cvv: '',
+          zip_billing: '',
+        }
+      }
+      data={
+        [
+          {
+            propName: 'credit_card',
+            title: 'Credit Card Number: ',
+            placeholderName: 'Credit Card Number',
+          },
+          {
+            propName: 'expiry_date',
+            title: 'Expiration Date: ',
+            placeholderName: 'Expiration Date',
+          },
+          {
+            propName: 'cvv',
+            title: 'CVV: ',
+            placeholderName: 'CVV',
+          },
+          {
+            propName: 'zip_billing',
+            title: 'ZIP: ',
+            placeholderName: 'ZIP',
+          }
+        ]
+      }
+      />);
 
     return (
       <div>
         <h1>Multi-Step-Checkout</h1>
-        {form}
+        {this.state.currForm === 0 && form0}
+        {this.state.currForm === 1 && form1}
+        {this.state.currForm === 2 && form2}
+        {this.state.currForm === 3 && form3}
+
       </div>
     );
   }

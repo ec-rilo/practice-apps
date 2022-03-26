@@ -52,4 +52,18 @@ const form_2 = {
 
 }
 
-export { form_0, form_1, form_2 };
+const form_3 = {
+
+  updateUser: (user, callback) => {
+    axios.put('/checkout/form_3', user)
+    .then((response) => {
+      callback(null, response);
+    })
+    .catch((err) => {
+      callback(err);
+    })
+  }
+
+};
+
+export { form_0, form_1, form_2, form_3 };
