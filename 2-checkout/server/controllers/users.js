@@ -26,7 +26,7 @@ module.exports = {
   },
 
   put: (req, res) => {
-    models.users.updateCheckoutComplete(req.session_id, (err, response) => {
+    models.users.updateCheckoutComplete((err, response) => {
       if (err) {
         res.send(err);
       } else {

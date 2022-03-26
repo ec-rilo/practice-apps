@@ -1,11 +1,5 @@
 import React from 'react';
 
-const NextBtn = ({ updateUser, updateViewableForm}) => (
-  <button onClick={() => {
-
-  }}>
-  Next
-  </button>
-);
+const NextBtn = ({ callback }) => <button onClick={() => callback()}>Next</button>;
 
 export default NextBtn;

@@ -20,21 +20,15 @@ module.exports = {
     db.beginTransactionAsync()
     .then(() => {
       const query = 'INSERT INTO shipping VALUES (?, null, null, null, null, null, null);';
-      db.query(
-        query,
-        [session_id]);
+      db.query(query, [session_id]);
     })
     .then(() => {
       const query = 'INSERT INTO billing VALUES (?, null, null, null, null);';
-      db.query(
-        query,
-        [session_id]);
+      db.query(query, [session_id]);
     })
     .then(() => {
       const query = 'INSERT INTO users VALUES (null, ?, null, null, null, 0, ?, ?);';
-      db.query(
-        query,
-        [session_id, session_id, session_id]);
+      db.query(query,[session_id, session_id, session_id]);
     })
     .then((response) => {
       db.commitAsync((response) => {

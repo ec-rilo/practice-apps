@@ -3,6 +3,9 @@ import React from 'react';
 // Components
 import NextBtn from './NextBtn.jsx';
 
+// axios
+import requests from '../requests.js';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -30,7 +33,7 @@ class App extends React.Component {
     }
     this.updateUser = this.updateUser.bind(this);
     this.createUser = this.createUser.bind(this);
-    this.updateViewableForm = this.updateViewableForm(this);
+    this.updateViewableForm = this.updateViewableForm.bind(this);
   }
 
   updateUser(user) {
@@ -38,18 +41,52 @@ class App extends React.Component {
   }
 
   createUser(user) {
-
+    requests.getUser((err, user) => {
+      if (err) {
+        console.error(err);
+      } else {
+        if (!user) {
+          requests.addUser((err, response) => {
+            if (err) {
+              console.error(err);
+            } else {
+              console.log(response);
+            }
+          });
+        } else {
+          this.setState({
+            user
+          });
+        }
+      }
+    });
   }
 
   updateViewableForm() {
-
+    const currForm = this.state.currForm + 1;
+    this.setState({
+      currForm
+    });
   }
 
   render() {
     return (
       <div>
         <h1>Multi-Step-Checkout</h1>
-        {this.state.currForm === 0 && <NextBtn updateUser={this.updateUser} createUser={this.createUser}/>}
+        {this.state.currForm === 0
+        &&
+        <NextBtn callback={() => {
+          this.updateViewableForm();
+          this.createUser(this.state.user);
+        }}
+        />}
+        {/* {this.state.currForm === 1
+        &&
+        <NextBtn callback={() => {
+          this.updateViewableForm();
+          this.createUser(this.state.user);
+        }}
+        />} */}
       </div>
     );
   }

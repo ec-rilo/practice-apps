@@ -20,7 +20,7 @@ db.connectAsync()
       "credit_card BIGINT, " +
       "expiry_date VARCHAR(25), " +
       "cvv INT, " +
-      "billing_zip INT);"
+      "zip_billing INT);"
     )
   )
   .then(() =>
@@ -31,7 +31,7 @@ db.connectAsync()
       "line_2 VARCHAR(25), " +
       "city VARCHAR(25), " +
       "state VARCHAR(25), " +
-      "zip INT, " +
+      "zip_shipping INT, " +
       "phone INT);"
     )
   )
@@ -44,8 +44,8 @@ db.connectAsync()
       "email VARCHAR(30), " +
       "password VARCHAR(30), " +
       "checkout_complete TINYINT DEFAULT 0, " +
-      "id_billing INT, " +
-      "id_shipping INT, " +
+      "id_billing VARCHAR(200), " +
+      "id_shipping VARCHAR(200), " +
       "FOREIGN KEY (id_billing) " + "REFERENCES billing(id) ON DELETE CASCADE ON UPDATE CASCADE, " +
       "FOREIGN KEY (id_shipping) " + "REFERENCES shipping(id) ON DELETE CASCADE ON UPDATE CASCADE);"
     )
