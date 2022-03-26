@@ -100,16 +100,14 @@ class App extends React.Component {
       }} />);
     } else if (this.state.currForm === 1) {
       form =
-      (<Form_1
-        callback={(user) => {
+      (<Form_1 callback={(user) => {
           this.updateUser(user);
           this.updateViewableForm();
         }
       } />);
     } else if (this.state.currForm === 2) {
       form =
-      (<Form_2
-      callback={(user) => {
+      (<Form_2 callback={(user) => {
         this.updateUser(user);
         this.updateViewableForm();
       }
