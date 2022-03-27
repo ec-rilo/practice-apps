@@ -22,6 +22,17 @@ const form_0 = {
     });
   },
 
+  getCheckoutStatus: (callback) => {
+    axios.get('/checkout/')
+    .then((response) => {
+      const status = response.data['checkout_complete'];
+      callback(null, status);
+    })
+    .catch((err) => {
+      callback(err);
+    })
+  }
+
 };
 
 const form_1 = {
@@ -66,4 +77,18 @@ const form_3 = {
 
 };
 
-export { form_0, form_1, form_2, form_3 };
+const confirmation_page = {
+
+  setCheckoutComplete: (callback) => {
+    axios.put('/checkout')
+    .then((response) => {
+      callback(null, response);
+    })
+    .catch((err) => {
+      callback(err);
+    })
+  }
+
+}
+
+export { form_0, form_1, form_2, form_3, confirmation_page };

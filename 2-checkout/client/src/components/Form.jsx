@@ -14,9 +14,17 @@ class Form extends React.Component {
   }
 
   allKeysArePopulated(user) {
+    let keys = Object.keys(user);
+    keys = keys.filter((key) => !key.includes('default'));
+
     let allArePopulated = true;
-    for (let key in user) {
-      if (user[key] === '') {
+
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+      console.log('KEY: ', key);
+      console.log('VALUE: ', user[key]);
+
+      if (user[key] === '' || user[key] === null || user[key] === undefined) {
         allArePopulated = false;
         break;
       }
@@ -51,7 +59,6 @@ class Form extends React.Component {
         this.addKeys(newUser, user);
 
         this.addDefaultKeys(newUser);
-        newUser.formSubmitted = false;
 
         this.setState(newUser);
       }
@@ -70,9 +77,7 @@ class Form extends React.Component {
           const allKeysArePopulated = this.allKeysArePopulated(user);
 
           if (allKeysArePopulated) {
-            this.setState({
-              formSubmitted: true
-            })
+
             callback(user);
           } else {
             window.alert('ALL fields must be filled out in order to submit!');
